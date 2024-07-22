@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-export default function Slider({src, alt, screenSize, imageCount, setImageCount}) {
+export default function Slider({src, alt, screenSize, imageCount, setImageCount, handleImageCLick, setModalSrc}) {
     
     useEffect(() => {
         if(screenSize.width<600){
@@ -30,6 +30,9 @@ export default function Slider({src, alt, screenSize, imageCount, setImageCount}
         scrollSnapAlign:'start'
     }
     return (
-    <img src={src} alt={alt} style={imageStyle} loading='lazy'/>
+    <img src={src} alt={alt} style={imageStyle} loading='lazy' onClick={()=>{
+        setModalSrc(src);
+        handleImageCLick()
+    }}/>
   )
 }

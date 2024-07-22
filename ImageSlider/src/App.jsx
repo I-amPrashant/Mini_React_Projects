@@ -14,7 +14,10 @@ export default function App() {
     height:window.innerHeight
   });
   const [imageCount, setImageCount] = useState(0);
+  const [openModel, setOpenModel] = useState(false);
+  const [modalSrc, setModalSrc] = useState("");
   const containerRef=useRef();
+
   useEffect(() => {
     const handleResize=()=>{
       setScreenSize({
@@ -51,7 +54,12 @@ export default function App() {
       containerRef.current.scrollLeft-=scrollAmount
     }
   }
+
+  const handleImageCLick=()=>{
+    setOpenModel(true)
+  }
   return (
+    <>
     <div className="main-container">
       <div className="container" ref={containerRef}>
         {images.map((item, index) => {
@@ -62,6 +70,8 @@ export default function App() {
               imageCount={imageCount}
               setImageCount={setImageCount}
               screenSize={screenSize}
+              handleImageCLick={handleImageCLick}
+              setModalSrc={setModalSrc}
               alt={`img${index}`}
             />
           );
@@ -74,5 +84,16 @@ export default function App() {
           <i className="fa-solid fa-chevron-right"></i>
         </button>
     </div>
+
+        {openModel && (
+          <div className="modal">
+              <img
+                src={modalSrc}
+                alt="modal"
+                onClick={() => setOpenModel(false)}
+              />
+          </div>
+        )}
+    </>
   );
 }
