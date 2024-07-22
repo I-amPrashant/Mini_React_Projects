@@ -50,7 +50,6 @@ export default function App() {
       const scrollAmount=(containerRef.current.clientWidth*100)/100
       containerRef.current.scrollLeft-=scrollAmount
     }
-    console.log(containerRef.current.scrollLeft)
   }
   return (
     <div className="main-container">
