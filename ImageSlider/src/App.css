@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 #root{
     max-width: 1350px;
@@ -11,8 +12,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 20px;
-    background:linear-gradient(45deg, #ff6f61, #debb77);
+    padding: 0 25px;
+    background:conic-gradient(from 180deg, #000000, #434343, #000000);
 ;
 }
 .main-container{
@@ -23,6 +24,7 @@
     display: flex;
     overflow-x: scroll;
     width: 100%;
+    scroll-snap-type:x mandatory;
 }
 ::-webkit-scrollbar{
     width: 0;

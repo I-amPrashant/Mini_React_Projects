@@ -12,7 +12,6 @@ export default function Slider({src, alt, screenSize, imageCount, setImageCount}
         }
         }, [screenSize])
 
-    console.log(screenSize)
     const  imageSize=()=>{
         if(imageCount===3){
             return '33.33%'
@@ -27,7 +26,8 @@ export default function Slider({src, alt, screenSize, imageCount, setImageCount}
         width:imageSize(),
         height:"auto",
         maxHeight:'500px',
-        minHeight:'300px'
+        minHeight:'300px',
+        scrollSnapAlign:'start'
     }
     return (
     <img src={src} alt={alt} style={imageStyle} loading='lazy'/>
