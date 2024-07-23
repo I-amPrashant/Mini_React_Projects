@@ -4,11 +4,12 @@ import img2 from "./assets/black-panther-minimalist-laptop-screen-e2mt0mc85gfbja
 import img3 from "./assets/low_polygonal_wolf-wallpaper-1920x1200.jpg";
 import img4 from "./assets/music_16-wallpaper-1920x1200.jpg";
 import img5 from "./assets/today-you-die-img.jpg"
+import img6 from "./assets/black-panther-minimalist-laptop-screen-e2mt0mc85gfbjatu.jpg"
 import "./App.css";
 import Slider from "./Slider";
 
 export default function App() {
-  const images = [img1, img2, img3, img4, img5];
+  const images = [img1, img2, img3, img4, img5, img6];
   const [screenSize, setScreenSize] = useState({
     width:window.innerWidth,
     height:window.innerHeight
@@ -16,6 +17,8 @@ export default function App() {
   const [imageCount, setImageCount] = useState(0);
   const [openModel, setOpenModel] = useState(false);
   const [modalSrc, setModalSrc] = useState("");
+  const intervalRef = useRef(null);
+  const openModelRef = useRef(false);
   const containerRef=useRef();
 
   useEffect(() => {
@@ -29,6 +32,9 @@ export default function App() {
 
     return () => window.removeEventListener("resize",handleResize)
   }, [])
+  useEffect(() => {
+    openModelRef.current = openModel;
+  }, [openModel]);
   
   const handlePrevClick=()=>{
     if(imageCount===3){
@@ -58,6 +64,22 @@ export default function App() {
   const handleImageCLick=()=>{
     setOpenModel(true)
   }
+  useEffect(() => {
+    if (intervalRef.current === null) {
+      const interval = setInterval(() => {
+        if (!openModelRef.current) {
+          handlePrevClick();
+        }
+      }, 3000);
+      intervalRef.current = interval;
+    }
+    return () => {
+      if (intervalRef.current !== null) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
+  }, [imageCount]);
   return (
     <>
     <div className="main-container">
