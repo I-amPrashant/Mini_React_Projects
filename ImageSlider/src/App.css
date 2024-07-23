@@ -19,6 +19,7 @@
 .main-container{
     position: relative;
     width: 100%;
+    gap: 20px;
 }
 .container{
     display: flex;
@@ -78,4 +79,28 @@
         visibility: visible;
         scale: 1;
     }
+}
+.dots-container{
+    width: 100%;
+    position: relative;
+    margin-top: 20px;
+    text-align: center;
+}
+ul{
+    list-style: none;
+    display: inline-flex;
+    width: max-content;
+    margin:0 auto;
+    gap: 10px;
+}
+li{
+    height: 10px;
+    width: 10px;
+    background-color: grey;
+    border-radius: 100%;
+    cursor: pointer;
+    transition: .3 ease-in-out;
+}
+li.active{
+    transform: scale(1.2);
 }
