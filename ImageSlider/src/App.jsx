@@ -4,12 +4,11 @@ import img2 from "./assets/black-panther-minimalist-laptop-screen-e2mt0mc85gfbja
 import img3 from "./assets/low_polygonal_wolf-wallpaper-1920x1200.jpg";
 import img4 from "./assets/music_16-wallpaper-1920x1200.jpg";
 import img5 from "./assets/today-you-die-img.jpg"
-import img6 from "./assets/black-panther-minimalist-laptop-screen-e2mt0mc85gfbjatu.jpg"
 import "./App.css";
 import Slider from "./Slider";
 
 export default function App() {
-  const images = [img1, img2, img3, img4, img5, img6];
+  const images = [img1, img2, img3, img4, img5];
   const [screenSize, setScreenSize] = useState({
     width:window.innerWidth,
     height:window.innerHeight
@@ -17,6 +16,7 @@ export default function App() {
   const [imageCount, setImageCount] = useState(0);
   const [openModel, setOpenModel] = useState(false);
   const [modalSrc, setModalSrc] = useState("");
+  const [slideIndex, setSlideIndex] = useState(0);
   const intervalRef = useRef(null);
   const openModelRef = useRef(false);
   const containerRef=useRef();
@@ -37,6 +37,7 @@ export default function App() {
   }, [openModel]);
   
   const handlePrevClick=()=>{
+    setSlideIndex(prevIndex=> prevIndex + 1%images.length);
     if(imageCount===3){
       const scrollAmount=(containerRef.current.clientWidth*33.33)/100
       containerRef.current.scrollLeft+=scrollAmount
@@ -49,6 +50,7 @@ export default function App() {
     }
   }
   const handleNextClick=()=>{
+    setSlideIndex(prevIndex=> prevIndex - 1%images.length);
     if(imageCount===3){
       const scrollAmount=(containerRef.current.clientWidth*33.33)/100
       containerRef.current.scrollLeft-=scrollAmount
@@ -70,7 +72,7 @@ export default function App() {
         if (!openModelRef.current) {
           handlePrevClick();
         }
-      }, 3000);
+      }, 4000);
       intervalRef.current = interval;
     }
     return () => {
@@ -80,6 +82,12 @@ export default function App() {
       }
     };
   }, [imageCount]);
+  useEffect(() => {
+      if(slideIndex===images.length-1){
+        containerRef.current.scrollTo(0,0);
+        setSlideIndex(0)
+      }
+  }, [slideIndex])
   return (
     <>
     <div className="main-container">
@@ -99,10 +107,10 @@ export default function App() {
           );
         })}
       </div>
-        <button className="previous-btn" onClick={()=> handleNextClick()}>
+        <button className="previous-btn" disabled={slideIndex===0 && true} onClick={()=> handleNextClick()}>
           <i className="fa-solid fa-chevron-left"></i>
         </button>
-        <button className="next-btn"   onClick={()=> handlePrevClick()}>
+        <button className="next-btn" disabled={slideIndex===images.length-2 && true}   onClick={()=> handlePrevClick()}>
           <i className="fa-solid fa-chevron-right"></i>
         </button>
     </div>
