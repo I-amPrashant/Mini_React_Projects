@@ -4,39 +4,53 @@ import Pagination from './Pagination';
 
 export default function App() {
   const [data, setData] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(2);
-  const [apiPage, setApiPage] = useState(1);
+  const [currentIndex, setCurrentIndex] = useState(1);
   const [loading, setLoading]=useState(false);
   const [perPageData, setPerPageData]=useState([]);
+  const [startIndex, setStartIndex]=useState(false);
+  const [endIndex, setEndIndex]=useState(false);
   const pageSize=9;
 
   useEffect(() => {
     async function getImages(){
       setLoading(true);
-      const url=`https://picsum.photos/v2/list?page=${apiPage}&limit=100`
+      const url=`https://picsum.photos/v2/list?page=1&limit=200`
       const result=await fetch(url);
       const data=await result.json();
       setData(data);
       setLoading(false);
     }
     getImages();
-  }, [apiPage]);
+  }, []);
 
-  console.log(' i ran first')
   useEffect(() => {
-    if(data){
-       setPerPageData(data?.slice((currentIndex-1)*pageSize, currentIndex*pageSize))
+    setPerPageData([])
+    function setData(){
+      setPerPageData(data.slice((currentIndex-1)*pageSize, currentIndex*pageSize))
     }
-  }, [data, currentIndex])
-  console.log('i ran second')
+    if(data.length>0){
+      setTimeout(() => {
+        setData();
+      }, 500);
+    }
+  }, [data,currentIndex])
+
+  useEffect(() =>{
+    if(perPageData.length>0){
+      setLoading(false);
+      currentIndex===1?setStartIndex(true):setStartIndex(false);
+      currentIndex===Math.ceil(data.length/pageSize)?setEndIndex(true):setEndIndex(false);
+    }else{
+      setLoading(true);
+    }
+  }, [currentIndex, perPageData])
   return (
     <div className='main-container'>
       {/* pagination and images wrapper   */}
             <div className='pagination-container'>
                   <ImageItems perPageData={perPageData} loading={loading}/>
-                  <Pagination />
+                  <Pagination setCurrentIndex={setCurrentIndex} startIndex={startIndex} endIndex={endIndex}/>
             </div>
-            
       {/* pagination and images wrapper   */}
        </div>
   )
