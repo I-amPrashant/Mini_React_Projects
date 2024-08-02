@@ -6,7 +6,7 @@ export default function ImageItems({perPageData, loading}) {
     <>
     {loading?(
        <div className='loading-container'>
-       <img src={loadingImage} alt='loading' className='loading' loading='lazy'/>
+       <img src={loadingImage} alt='loading' className='loading'/>
      </div>
     ):(
       <div className='images-container'>

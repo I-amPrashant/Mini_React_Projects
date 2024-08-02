@@ -44,12 +44,14 @@ export default function App() {
       setLoading(true);
     }
   }, [currentIndex, perPageData])
+
+  const totalPages=Math.ceil(data.length/pageSize);
   return (
     <div className='main-container'>
       {/* pagination and images wrapper   */}
             <div className='pagination-container'>
                   <ImageItems perPageData={perPageData} loading={loading}/>
-                  <Pagination setCurrentIndex={setCurrentIndex} startIndex={startIndex} endIndex={endIndex}/>
+                  <Pagination setCurrentIndex={setCurrentIndex} startIndex={startIndex} endIndex={endIndex} totalPages={totalPages} currentIndex={currentIndex}/>
             </div>
       {/* pagination and images wrapper   */}
        </div>

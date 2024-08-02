@@ -55,6 +55,8 @@
 }
 .loading-container{
     padding: 100px 0;
+    display: flex;
+    justify-content: center;
 }
 .loading{
     margin: 0 auto;
@@ -71,6 +73,15 @@ button{
 }
 button:disabled{
     background-color: grey;
+}
+ul{
+    list-style:none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+li button{
+    padding: 7px;
 }
 @media (min-width:650px){
     .image{
