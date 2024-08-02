@@ -31,3 +31,7 @@ Here's a brief overview of some of the projects you'll find in this repository:
 ### Week 1: Image slider
 - **Focus**: Introduction to React, `useState` for state management. 'useEffect, useRef' hook for scroll and other functionalities.
 - **Description**: A basic image slider application where user can use slider or the navigation button to scroll to different images.
+
+### Week 2: React Pagination
+- **Focus**: 'useState' for state management, 'useEffect' for side effects.
+- **Description**: A React pagination project which manages large datasets in client side by dividing data into different pages with page controls to view the desired page.
