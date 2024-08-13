@@ -12,7 +12,7 @@ export default function Navbar() {
                 <li>About</li>
                 <li>Contact</li>
             </ul>
-                <button className='navbar-button'><i class="fa-solid fa-cart-shopping"></i><span className='addedCount'>2</span></button>
+                <button className='navbar-button'><i className="fa-solid fa-cart-shopping"></i><span className='addedCount'>2</span></button>
         </div>
     </nav>
   )
