@@ -14,9 +14,13 @@ body {
 #root {
   width: 100%;
   height: 100%;
+  overflow-y: scroll;
   position: relative;
   max-width: 1350px;
   margin: 0 auto;
+}
+::-webkit-scrollbar{
+    display: none;
 }
 .navbar {
   display: flex;
@@ -64,6 +68,7 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   gap: 20px;
   padding: 0 30px;
 }
@@ -74,6 +79,7 @@ button {
 input {
   outline: none;
   border: none;
+  min-width:min-content;
 }
 h1 {
   font-size: 28px;
@@ -89,7 +95,28 @@ h1 {
 }
 .productItem{
     width: 100%;
+    position: relative;
 }
+.productItem img{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    cursor:pointer;
+}
+.productItem img:hover{
+    animation: animateImage .5s linear;
+}
+@keyframes animateImage{
+    0%{    
+        visibility: hidden;  
+        opacity: 0;
+    }
+    100%{      
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
 @media (width>600px){
     .productItem{
         width: 50%;
@@ -99,4 +126,9 @@ h1 {
     .productItem{
         width: 33.33%;
     }
+}
+@media (width<400px){
+    .productItem img{
+        height: auto;
+}
 }
