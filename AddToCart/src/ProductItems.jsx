@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 export default function ProductItems({ item }) {
+  const [liked, setLiked] = useState(false);
   const changeImage = (e) => {
     e.target.src = item.image[0];
   };
@@ -16,6 +17,8 @@ export default function ProductItems({ item }) {
         onMouseLeave={(e) => defaultImage(e)}
       />
       <h2>{item.productName}</h2>
+      <p>{item.description.length>75?`${item.description.slice(0,75)}...`:item.description} <span style={{color:'black', fontWeight:'500'}}>Read more</span></p>
+      <div className="likedIndicator"><i className={`fa-${liked?"solid":"regular"} fa-heart ${liked?'fa-beat':''}`} onClick={() => setLiked(!liked)}></i></div>
     </div>
   );
 }
