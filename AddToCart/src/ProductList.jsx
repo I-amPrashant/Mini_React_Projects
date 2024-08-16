@@ -2,8 +2,7 @@ import React from "react";
 import ProductItems from "./ProductItems";
 import images from "./images";
 
-export default function ProductList() {
-
+export default function ProductList({setTotalBookmark, setBookmarkItems}) {
   return (
     <div className="productList-wrapper">
       <div className="productSearch-wrapper">
@@ -15,7 +14,7 @@ export default function ProductList() {
       </div>
       <div className="productList">
         {images.map((item, index)=>{
-          return <ProductItems key={index} item={item}/>
+          return <ProductItems key={index} item={item} setTotalBookmark={setTotalBookmark}  setBookmarkItems={setBookmarkItems}/>
         })}
       </div>
     </div>
