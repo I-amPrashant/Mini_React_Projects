@@ -15,6 +15,7 @@ body {
   width: 100%;
   height: 100%;
   overflow-y: scroll;
+  overflow-x: hidden;
   position: relative;
   max-width: 1350px;
   margin: 0 auto;
@@ -28,14 +29,17 @@ body {
   color: rgb(19, 18, 18);
   padding: 20px 30px;
 }
-.nav-link {
+.nav-link{
   display: flex;
   align-items: center;
   justify-content: center;
+  transform: translateX(0);
+  transition: .3s ease-in;
 }
 .nav-link ul {
   display: inline-flex;
   list-style: none;
+  flex-direction: row;
   gap: 25px;
 }
 .nav-link ul li {
@@ -62,6 +66,53 @@ button {
   color: white;
   padding: 0 5px;
   border-radius: 50%;
+}
+.hamburger-wrapper{
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+.hamburger{
+  font-size: 22px;
+}
+.hideSidebar{
+  position: absolute;
+  right: 20px;
+  top: 0px;
+  font-size: 22px;
+  z-index: 100;
+  cursor: pointer;
+  display: none;
+}
+@media (width<600px) {
+  .nav-link{
+    position: absolute;
+    right: 0;
+    width: 250px;
+    transform: translateX(100%);
+    padding: 30px 15px;
+    flex-direction: column;
+    align-items: start;
+    justify-content: start;
+    background-color: white;
+    z-index: 100;
+    height: 100%;
+  }
+  .nav-link ul{
+    flex-direction: column;
+    gap:15px;
+  }
+  .hamburger-wrapper{
+    display: flex;
+  }
+  .navbar-button{
+    margin-left: 0;
+    margin-top: 15px;
+  }
+  .hideSidebar{
+    display: block;
+  }
+  
 }
 .productSearch-wrapper {
   margin-top: 50px;
@@ -96,6 +147,7 @@ h1 {
 }
 .productItem{
     width: 100%;
+    max-width: 450px;
     position: relative;
     box-shadow: 0 0 10px 1px rgb(12, 12, 12, .6);
     padding: 20px 10px;
@@ -103,7 +155,7 @@ h1 {
 }
 .productItem img{
     width: 100%;
-    height: 200px;
+    height: auto;
     object-fit: cover;
     cursor:pointer;
 }
@@ -121,9 +173,9 @@ h1 {
     }
 }
 
-@media (width>600px){
+@media (width>700px){
     .productItem{
-        width: 50%;
+        width: 47%;
     }
 }
 @media (width>950px){
@@ -131,9 +183,9 @@ h1 {
         width: 32%;
     }
 }
-@media (width<400px){
+@media (width>400px){
     .productItem img{
-        height: auto;
+        height: 225px;
 }
 }
 .likedIndicator{
