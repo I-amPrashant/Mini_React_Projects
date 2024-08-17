@@ -1,8 +1,12 @@
-import React from "react";
+import React, {useContext} from "react";
 import ProductItems from "./ProductItems";
 import images from "./images";
+import Modal from "./Modal";
+import { myContext } from "./UseContextHook";
 
 export default function ProductList() {
+  const {modalData}=useContext(myContext)
+
   return (
     <div className="productList-wrapper">
       <div className="productSearch-wrapper">
@@ -17,6 +21,7 @@ export default function ProductList() {
           return <ProductItems key={index} item={item} />
         })}
       </div>
+      <Modal/>
     </div>
   );
 }

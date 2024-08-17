@@ -1,8 +1,7 @@
 import React, { useState, useContext } from "react";
 import { myContext } from "./UseContextHook";
-export default function ProductItems({ item}) {
-
-  const {setTotalBookmark, setBookmarkItems}=useContext(myContext);
+export default function ProductItems({item}) {
+  const {setTotalBookmark, setBookmarkItems, setModalData}=useContext(myContext);
   const [liked, setLiked] = useState(false);
   const changeImage = (e) => {
     e.target.src = item.image[0];
@@ -11,11 +10,12 @@ export default function ProductItems({ item}) {
     e.target.src = item.image[1];
   };
 
-  const handleLikeClick=()=>{
+  const handleLikeClick=(e)=>{
+    e.stopPropagation();//stop bubbling
     if(!liked){
       setTotalBookmark(prev=>prev+1)
       setBookmarkItems(prev=>[...prev, item])
-      item.liked=true
+      item.liked=true;
     }else{
       setTotalBookmark(prev=>prev-1)
       setBookmarkItems(prev=> {
@@ -26,7 +26,7 @@ export default function ProductItems({ item}) {
     setLiked(!liked);
   }
   return (
-    <div className="productItem">
+    <div className="productItem" onClick={() => setModalData(item)}>
       <img
         src={item.image[1]}
         alt="image"
@@ -35,7 +35,7 @@ export default function ProductItems({ item}) {
       />
       <h2>{item.productName}</h2>
       <p>{item.description.length>75?`${item.description.slice(0,75)}...`:item.description} <span style={{color:'black', fontWeight:'500'}}>Read more</span></p>
-      <div className="likedIndicator"><i className={`fa-${liked?"solid":"regular"} fa-heart ${liked?'fa-beat':''}`} onClick={() => handleLikeClick()}></i></div>
+      <div className="likedIndicator"><i className={`fa-${liked?"solid":"regular"} fa-heart ${liked?'fa-beat':''}`} onClick={(e) => handleLikeClick(e)}></i></div>
     </div>
   );
 }
