@@ -6,6 +6,7 @@ const ContextProvider = ({ children }) =>{
   const [totalBookmark, setTotalBookmark] = useState(0);
   const [bookmarkItems, setBookmarkItems] = useState([]);
   const [modalData, setModalData] = useState({});
+  const [imagesList, setImagesList] = useState([]);
 
   return (
     <myContext.Provider
@@ -15,7 +16,9 @@ const ContextProvider = ({ children }) =>{
         bookmarkItems,
         setBookmarkItems,
         modalData,
-        setModalData
+        setModalData,
+        imagesList,
+        setImagesList
       }}
     >
       {children}

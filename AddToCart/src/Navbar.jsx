@@ -2,7 +2,8 @@ import React, {useRef, useEffect, useContext} from 'react'
 import {myContext} from './UseContextHook'
 export default function Navbar() {
   const sidebarRef=useRef()
-  const {totalBookmark}=useContext(myContext)
+  const bookmarkRef=useRef()
+  const {totalBookmark, bookmarkItems}=useContext(myContext)
 
   useEffect(()=>{
     const handleResize=()=>{
@@ -21,6 +22,9 @@ export default function Navbar() {
   const handleCloseSidebar=()=>{
     sidebarRef.current.style.transform='translateX(100%)'
   }
+  const handleViewBookmark=()=>{
+    bookmarkRef.current.style.display='flex'
+  }
   return(
     <nav className='navbar'>
         <div className='logo-wrapper' style={{fontSize: '2rem'}}>
@@ -35,7 +39,12 @@ export default function Navbar() {
                 <li>About</li>
                 <li>Contact</li>
             </ul>
-                <button className='navbar-button'><i className="fa-solid fa-cart-shopping"></i><span className='addedCount'>{totalBookmark?totalBookmark:''}</span></button>
+                <button className='navbar-button'><i className="fa-solid fa-cart-shopping" onClick={()=>handleViewBookmark()}></i><span className='addedCount'>{totalBookmark?totalBookmark:''}</span></button>
+                <div className='bookmark-items' ref={bookmarkRef}>
+                    {bookmarkItems.map((item, index)=>{
+                      return <p key={index}>{item.productName}</p>
+                    })}
+                </div>
             <div className='hideSidebar' onClick={()=> handleCloseSidebar()}><i className="fa-solid fa-xmark"></i></div>    
         </div>
     </nav>

@@ -1,11 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import ProductItems from "./ProductItems";
-import images from "./images";
 import Modal from "./Modal";
 import { myContext } from "./UseContextHook";
+import images from "./images.jsx";
 
 export default function ProductList() {
-  const { modalData } = useContext(myContext);
+  const { imagesList, setImagesList } = useContext(myContext);
+
+  useEffect(() => {
+    setImagesList(images);
+  }, [])
 
   return (
     <>
@@ -18,7 +22,7 @@ export default function ProductList() {
           </div>
         </div>
         <div className="productList">
-          {images.map((item, index) => {
+          {imagesList.length && imagesList.map((item, index) => {
             return <ProductItems key={index} item={item} />;
           })}
         </div>
