@@ -6,7 +6,7 @@ import { ContextProvider} from "./UseContextHook";
 export default function App(){
   return (
     <ContextProvider>
-      <div>
+      <div className="main-container">
         <Navbar/>
         <ProductList/>
       </div>
