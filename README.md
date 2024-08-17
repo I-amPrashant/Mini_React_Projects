@@ -35,3 +35,7 @@ Here's a brief overview of some of the projects you'll find in this repository:
 ### Week 2: React Pagination
 - **Focus**: 'useState' for state management, 'useEffect' for side effects.
 - **Description**: A React pagination project which manages large datasets in client side by dividing data into different pages with page controls to view the desired page.
+
+### Week 3: Add To Cart
+- **Focus**: 'useState' for state management, 'useEffect' for side effects, 'useRef hook for Dom' and 'useContext hook for global state management'.
+- **Description**: A simple react application to view products and add it to cart for later purchase.
