@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { myContext } from "./UseContextHook";
+export default function ProductItems({ item}) {
 
-export default function ProductItems({ item, setTotalBookmark, setBookmarkItems }) {
+  const {setTotalBookmark, setBookmarkItems}=useContext(myContext);
   const [liked, setLiked] = useState(false);
   const changeImage = (e) => {
     e.target.src = item.image[0];
@@ -13,11 +15,13 @@ export default function ProductItems({ item, setTotalBookmark, setBookmarkItems 
     if(!liked){
       setTotalBookmark(prev=>prev+1)
       setBookmarkItems(prev=>[...prev, item])
+      item.liked=true
     }else{
       setTotalBookmark(prev=>prev-1)
       setBookmarkItems(prev=> {
        return prev.filter(el=>el.productName!==item.productName)
       })
+      item.liked=false;
     }
     setLiked(!liked);
   }

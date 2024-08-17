@@ -1,7 +1,8 @@
-import React, {useRef, useEffect} from 'react'
-
-export default function Navbar({totalBookmark}) {
+import React, {useRef, useEffect, useContext} from 'react'
+import {myContext} from './UseContextHook'
+export default function Navbar() {
   const sidebarRef=useRef()
+  const {totalBookmark}=useContext(myContext)
 
   useEffect(()=>{
     const handleResize=()=>{
