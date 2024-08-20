@@ -13,8 +13,17 @@ export default function App() {
       <div className='feedback-button'><button onClick={() => handleButtonClick()}>Feedback</button></div>
       <div className='feedback' ref={feedbackRef}>
           <header>
-            <span className='feedback-icon'></span>&nbsp;Feedback
+            <div className='header-left'>
+            <span className='feedback-icon'><i class="fa-regular fa-comment"></i></span>&nbsp;Feedback
+            </div>
+            <div className='header-right'>
+              <button onClick={() => feedbackRef.current.style.display='none'}><i class="fa-solid fa-xmark"></i></button>
+            </div>
           </header>
+          <div className='feedback-body'>
+            <h1>How are you feeling</h1>
+            <h5>Your input is valuable in helping us better understand your needs and tailer our service accordingly.</h5>
+          </div>
       </div>
     </main>
   )
