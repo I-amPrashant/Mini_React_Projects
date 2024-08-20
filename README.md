@@ -39,3 +39,7 @@ Here's a brief overview of some of the projects you'll find in this repository:
 ### Week 3: Add To Cart
 - **Focus**: 'useState' for state management, 'useEffect' for side effects, 'useRef hook for Dom' and 'useContext hook for global state management'.
 - **Description**: A simple react application to view products and add it to cart for later purchase.
+
+### Week 4: User feedback
+- **Focus**: 'useState' for state management, 'useEffect' for feedback submission, 'useRef hook for Dom'.
+- **Description**: A simple user feedback UI made in react.
