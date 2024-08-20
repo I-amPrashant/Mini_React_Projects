@@ -1,8 +1,10 @@
-import React, {useState, useRef} from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 import "./App.css"
 
 export default function App() {
   const [emojiClick, setEmojiClick] = useState('')
+  const [feedbackData, setFeedbackData] = useState({})
+  const [inputValue, setInputValue] = useState('')
   const feedbackRef = useRef(null);
 
   const emojiInfo={
@@ -29,6 +31,23 @@ export default function App() {
     }
   }
  
+  const handleSubmit = () => {  
+    if(emojiClick && inputValue){
+      setFeedbackData({description:inputValue, emojiType:emojiClick});
+      setInputValue('');
+      setEmojiClick('');
+      feedbackRef.current.style.display='none';
+      document.querySelectorAll('.emoji').forEach((emoji) => {
+        emoji.classList.remove('active');
+      })
+    }else{
+      alert('please select an emoji and add a comment or close feedback')
+    }
+  }
+
+  useEffect(() => {
+    console.log(feedbackData);
+  }, [feedbackData])
 
   return (
     <main className='feedback-container'>
@@ -49,6 +68,10 @@ export default function App() {
           <div className='feedback-icons'>
            {Object.keys(emojiInfo).map((key) => <button className="emoji" key={key} onClick={(e)=> handleEmojiClick(e, key)} >{emojiInfo[key].emoji}</button>)}
           </div>
+          <footer>
+            <input type="text"  placeholder='Add a comment' value={inputValue} onChange={(e) => setInputValue(e.target.value)}/><br></br>
+            <button className='submit-button' onClick={() => handleSubmit()}>Submit</button>
+          </footer>
       </div>
     </main>
   )
