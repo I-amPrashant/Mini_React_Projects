@@ -52,7 +52,7 @@ body, html{
 }
 .main-container{
   display: flex;
-  gap:20px;
+  gap:100px;
   flex-wrap: wrap;
   margin-top: 50px;
 }

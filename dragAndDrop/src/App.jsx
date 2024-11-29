@@ -23,16 +23,23 @@ export default function App() {
     e.preventDefault();
   };
 
+  //drag and drop for container
   const handleDrop = (dataContainer) => {
     if (dataContainer === draggedIndex.dataContainer) {
       return;
     }
+
+    //create a new object by merging the two objects
     const newItems = [{ ...dataItems.data1, ...dataItems.data2 }];
     const deleteContainer = draggedIndex.dataContainer;
+
+    //filter method does not affect the original array.
     const removedItemsContainerData = dataItems[`${deleteContainer}`].filter(
       (i) => i !== dataItems[`${deleteContainer}`][draggedIndex.index]
     );
 
+
+    //append the removed item to the new array using the spread operator
     const addedItemsContainerData = [
       ...dataItems[`${dataContainer}`],
       dataItems[`${deleteContainer}`][draggedIndex.index],
@@ -44,6 +51,25 @@ export default function App() {
       [`${dataContainer}`]: addedItemsContainerData,
     });
 
+    setDraggedIndex({
+      index: "",
+      dataContainer: "",
+    });
+  };
+
+  const handleSameContainerDrop = (e, index, dataContainer) => {
+    e.stopPropagation();
+    if (dataContainer !== draggedIndex.dataContainer) {
+      return;
+    }
+    //splice directly affects the original state so we create a copy of the original state
+    const newItems = [...dataItems[`${dataContainer}`]];
+    const [removedData] = newItems.splice(
+      draggedIndex.index,
+      1
+    );
+    newItems.splice(index, 0, removedData);
+    setDataItems({ ...dataItems, [`${dataContainer}`]: newItems});
     setDraggedIndex({
       index: "",
       dataContainer: "",
@@ -67,6 +93,8 @@ export default function App() {
                 key={index}
                 draggable={true}
                 onDragStart={() => handleDragStart(index, "data1")}
+                onDragOver={(e) => handleDragOver(e)}
+                onDrop={(e) => handleSameContainerDrop(e, index, "data1")}
               >
                 {item}
               </div>
@@ -89,6 +117,8 @@ export default function App() {
                 key={index}
                 draggable={true}
                 onDragStart={() => handleDragStart(index, "data2")}
+                onDragOver={(e) => handleDragOver(e)}
+                onDrop={(e) => handleSameContainerDrop(e, index, "data2")}
               >
                 {item}
               </div>
