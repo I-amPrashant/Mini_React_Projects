@@ -61,7 +61,6 @@ body, html{
   padding: 20px 30px;
   background-color: white;
   border-radius: 20px;
-  min-height: 450px;
   max-height: fit-content;
   color: black;
 }
@@ -73,6 +72,8 @@ h2{
 .items-wrapper{
   display: flex;
   flex-direction: column;
+  min-height: 450px;
+  max-height: fit-content;
   gap: 20px;
 }
 .item{
